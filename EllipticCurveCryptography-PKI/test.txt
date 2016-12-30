@@ -1,0 +1,20 @@
+X.509 Version3
+Certificate:
+	1
+	EllipticCurve 
+	IYTECeng661
+	01.01.2017
+	30.01.2017
+	Huseyin Guven Ozgur
+	EllipticCurve 
+	NIST_P_192
+	64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1
+	188da80eb03090f67cbf20eb43a18800f4ff0afd82ff1012
+	07192b95ffc8da78631011ed6b24cdd573f977a11e794811
+	*PublicKey
+	661
+	*Voter/candidate identifier
+*Signature:
+
+
+
