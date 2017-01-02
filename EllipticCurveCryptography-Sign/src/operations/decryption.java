@@ -25,7 +25,8 @@ public class decryption {
         int numBits = p.bitLength();
         int blockSize = math.getBlockSize(c);
         int cipherTextBlockSize = math.getCipherTextBlockSize(c);
-        
+        System.out.println("P block size:" + (cipherText.length / cipherTextBlockSize) % 4);
+        System.out.println("P len:" + cipherText.length % cipherTextBlockSize);
         // Chunk the cipherText into blocks.
         if (cipherText.length % cipherTextBlockSize != 0 || (cipherText.length / cipherTextBlockSize) % 4 != 0) {
             throw new Exception("The length of the cipher text is not valid");
