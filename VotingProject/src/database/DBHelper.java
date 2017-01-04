@@ -15,9 +15,9 @@ public class DBHelper {
     /* Specify your database url here */
     private static final String DATABASE_URL = "jdbc:oracle:thin:@localhost:1521:xe";
     /* Specify your username here */
-    private static final String USERNAME = "burcusayinn@gmail.com";
+    private static final String USERNAME = "username";
     /* Specify your password here */
-    private static final String PASSWORD = "8560477Oracle-";
+    private static final String PASSWORD = "password";
     
 
 
