@@ -57,7 +57,7 @@ public class Sign implements Isign{
                     s = (temp.multiply((pr.multiply(r)).add(e))).mod(n);
                 }
             }
-        } while ((r.compareTo(BigInteger.ZERO) == 0) || (s.compareTo(BigInteger.ZERO) == 0));
+        } while ((r.compareTo(BigInteger.ZERO) == 0) || (s.compareTo(BigInteger.ZERO) == 0) || r.bitLength() != s.bitLength());
         Point signature = new Point();
         signature.setX(r);
         signature.setY(s);
