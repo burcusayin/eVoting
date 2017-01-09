@@ -1,8 +1,10 @@
-/announcement/
-/controller/
-/database/
-/ellipticCurve/
-/operations/
-/shuffling/
+/Ecc/
 /test/
+/Paillier/
+/registration/
+/systemCreation/
+/helper/
+/controller/
+/preparationForVoting/
+/wp_preparationForVoting/
 /voting/
