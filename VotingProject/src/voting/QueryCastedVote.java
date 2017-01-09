@@ -1,18 +1,23 @@
 package voting;
 
 import controller.Controller;
+import helper.DBHelper;
 
 public class QueryCastedVote {
 	
 	private String hashOfRegCode;
+	private String hashOfSeHregCode;
 	private boolean isLoginSuccessful;
 	private Controller c;
 	private IVoting iVoting;
+	private DBHelper db;
 		
 	public QueryCastedVote() throws Exception{
 		
 		c = Controller.getInstance();
 		iVoting = c.vm;
+		db = c.db;
+		c.setQueriedVote(getVote());
 	}
 
 
@@ -32,8 +37,11 @@ public class QueryCastedVote {
 			if(hashOfRegCode == null)
 			{
 				hashOfRegCode = iVoting.getHashOfFakeRegCode();
-				// DB operation
 			}
+			
+			// DB operation
+			hashOfSeHregCode = db.getHashOfSavedVoteForQuery(hashOfRegCode);
+			vote = hashOfSeHregCode;
 		}
 
 		return vote;

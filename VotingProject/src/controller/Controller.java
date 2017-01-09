@@ -26,11 +26,11 @@ public class Controller{
 	
 	/*Burcu Def*/
 	public DBHelper db = null;
-
 	ICreateElection paillier = null;
 	public IVote vote = null;
 	public IHash hash = null;
 	public IVoting vm = null;
+	public String queriedVote = null;
 	
 	/*Emre Def*/
 	
@@ -104,5 +104,15 @@ public class Controller{
 		this.email = null;
 		this.regCode = null;
 	}
+
+	public String getQueriedVote() {
+		return queriedVote;
+	}
+
+	public void setQueriedVote(String queriedVote) {
+		this.queriedVote = queriedVote;
+	}
+	
+	
 	
 }

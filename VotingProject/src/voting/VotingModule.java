@@ -1,10 +1,13 @@
 package voting;
 
+import java.lang.reflect.Array;
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 import Paillier.IVote;
 import controller.Controller;
 import hash.IHash;
+import helper.DBHelper;
 
 //Election bitince isCompleted ý true yap
 public class VotingModule implements IVoting{
@@ -24,6 +27,7 @@ public class VotingModule implements IVoting{
 	private String dbHashOfFakeRegCode;
 	private int validityFlag;
 	private int coercionFlag;
+	private DBHelper db;
 
 	
 	public VotingModule() throws Exception{
@@ -35,6 +39,8 @@ public class VotingModule implements IVoting{
 		this.controller = Controller.getInstance();
 		this.validityFlag = -1;
 		this.coercionFlag = -1;
+		this.db = controller.db;
+		this.hash = controller.hash;
 	}
 
 
@@ -64,17 +70,20 @@ public class VotingModule implements IVoting{
 		//Result deðeri döndürülür.
 		boolean result;
 		String email = controller.getEmail();
+		//DBden regCode ve hashRegCode çekilir set edilir.
+		ArrayList<String> regCodes = db.getRegCodeAndFakeRegCodeOfVoter(email);
+		dbHashOfRegCode = regCodes.get(0);
+		dbHashOfFakeRegCode = regCodes.get(1);
+
 		String regCode = controller.getRegCode();
-		hash = controller.hash;
+		
 		hashOfRegCode = hash.sha3(regCode, digestSizeBits);
 		
-		//DBden regCode ve hashRegCode çekilir set edilir.
-		
-		if(hashOfRegCode.equals(this.dbHashOfRegCode))
+		if(hashOfRegCode.equals(dbHashOfRegCode))
 		{
 			result = true;
 		}
-		else if(hashOfRegCode.equals(this.dbHashOfFakeRegCode))
+		else if(hashOfRegCode.equals(dbHashOfFakeRegCode))
 		{
 			this.isCodeFake = true;
 			this.hashOfFakeRegCode = hashOfRegCode; // control if it successfully assign

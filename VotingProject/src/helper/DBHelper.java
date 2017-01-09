@@ -138,6 +138,7 @@ public class DBHelper {
 	             return false;
 	        }
 	    }
+	 
 	 public boolean isRegisteredVoter(int vid){
 			
 		 ResultSet rs=null;
@@ -272,4 +273,52 @@ public class DBHelper {
     	 return candidateList;
     	 
      }
+     
+     public String getHashOfSavedVoteForQuery(String hashOfRegCode)
+	    {
+	        System.out.println("inside get hash of casted vote for query");
+	    
+	        String vSecret= null;
+	    	try 
+	    	{ 
+	    		String query = "select HASH_SEHREGCODE from Vote where VOTEID="+hashOfRegCode;
+	    		ResultSet rs= getResultOfQuery(query);
+	    			 
+	    		while(rs.next())
+	    	    {
+	    			System.out.println("queriedVote:"+rs.getString(1));
+	    	        vSecret = rs.getString(1);
+	    	    }
+	    	} catch (SQLException ex) 
+	    	{
+	    		Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
+	    	}
+	    	      			
+	    		return vSecret;
+	    }
+     
+     public ArrayList<String> getRegCodeAndFakeRegCodeOfVoter(String email)
+	    {
+	        System.out.println("inside get registration codes of voter");
+	        ArrayList<String> results = new ArrayList<>();
+	        
+	    	try 
+	    	{ 
+	    		String query = "select hash_regcode, hash_fakeregcode from Voter, RegisteredVoter where Voter.VoterID = RegisteredVoter.VoterID and Voter.email ="+email;
+	    		ResultSet rs= getResultOfQuery(query);
+	    			 
+	    		while(rs.next())
+	    	    {
+	    			System.out.println("RegCode: "+rs.getString(1)+" FakeRegCode:"+rs.getString(2));
+	    			results.add(rs.getString(1));
+	    			results.add(rs.getString(2));
+	    	    }
+	    	} catch (SQLException ex) 
+	    	{
+	    		Logger.getLogger(DBHelper.class.getName()).log(Level.SEVERE, null, ex);
+	    	}
+	    	      			
+	    		return results;
+	    }
+     
 }
